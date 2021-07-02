@@ -6,6 +6,7 @@ const app = express();
 
 const userRouter = require("./routes/users");
 const movieRouter = require("./routes/movie");
+const animeRouter = require("./routes/anime");
 const port = process.env.PORT || 3000;
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/movies", movieRouter);
+app.use("/api/v1/anime", animeRouter);
 
 app.use("*", (req, res) => {
     res.status(400).json({

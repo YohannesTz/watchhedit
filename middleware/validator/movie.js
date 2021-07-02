@@ -13,7 +13,7 @@ exports.validate = (type) => {
         case "CREATE":
             return [
                 body("title").not().isEmpty().withMessage("Movie name is required"),
-                body("description").not().isEmpty().withMessage("Movie Description"),
+                body("description").not().isEmpty().withMessage("Movie Description is required"),
                 body("average_rating").not().isEmpty().withMessage("Average rating is required")
             ];
         case "UPDATE":

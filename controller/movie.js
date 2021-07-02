@@ -50,7 +50,7 @@ exports.getAllMovies = async (req, res, next) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 };
 
@@ -118,7 +118,6 @@ exports.updateMovie = async (req, res, next) => {
 
         const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
-            populate: "authors",
         });
 
         if (!movie) {

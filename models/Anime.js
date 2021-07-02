@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate");
 
 const animeSchema = new mongoose.Schema({
     title_en:{
@@ -22,12 +23,10 @@ const animeSchema = new mongoose.Schema({
     episode_count:{
         type: Number,
     },
-    youtube_url:{
-        type: String,
-    },
     description:{ //synopsis
         type: String,
     }
 },{ timestamps: true });
 
+animeSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model("Anime", animeSchema);
