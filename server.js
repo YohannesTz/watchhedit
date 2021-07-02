@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const app = express();
 
 const userRouter = require("./routes/users");
-
+const movieRouter = require("./routes/movie");
 const port = process.env.PORT || 3000;
 
 dotenv.config();
@@ -31,8 +31,8 @@ app.get("/", (req, res) => {
     res.send("Server is running")
 });
 
-app.use("/api/v1/users", userRouter, () => console.log("requested here"));
-
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/movies", movieRouter);
 
 app.use("*", (req, res) => {
     res.status(400).json({
