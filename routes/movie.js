@@ -8,10 +8,13 @@ const router = express.Router();
 router
     .route("/")
     .get(verifyUser, movieController.getAllMovies)
-    .post(verifyUser, 
+    .post(verifyUser,
         movieController.uploadImage,
         movieValidation.validate("CREATE"),
         movieController.createMovie);
+
+router
+    .get("/search", verifyUser, movieController.searchMovie);
 
 router
     .route("/:id")
@@ -26,4 +29,5 @@ router
         movieValidation.validate("DELETE"),
         movieController.deleteMovie
     );
+
 module.exports = router;
