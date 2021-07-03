@@ -11,7 +11,7 @@ const animeSchema = new mongoose.Schema({
     title_jajp:{
         type: String,
     },
-    average_rating:{
+    rating:{
         type: String,
     },
     poster_image:{

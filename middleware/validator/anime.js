@@ -28,7 +28,7 @@ exports.validate = (type) => {
                 body("title_jajp").optional().not().isEmpty().withMessage("Anime Japaneese name is required"),
                 body("average_rating").optional().not().isEmpty().withMessage("Average rating is required"),
                 body("episode_count").optional().not().isEmpty().withMessage("Episode count is required"),
-                body("description").optional().not().isEmpty().withMessage("Description count is required")
+                body("description").optional().not().isEmpty().withMessage("Description is required")
             ];
         case "DELETE":
             return [
