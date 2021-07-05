@@ -14,25 +14,19 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String
     },
-    movieList:{
-        type: Array,
-        default:[]
-    },
-    animeList:{
-        type: Array,
-        default: []
-    }
-},{ timestamps: true });
+    movieList: [{ type: mongoose.Types.ObjectId, ref: "Movie" }],
+    animeList: [{ type: mongoose.Types.ObjectId, ref: "Anime" }],
+    bookList: [{ type: mongoose.Types.ObjectId, ref: "Book" }]
+}, { timestamps: true });
 
-userSchema.pre("save", async function(next) {
-    if(this.isModified("password")) {
+userSchema.pre("save", async function (next) {
+    if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 10);
     }
-
     next();
 });
 
-userSchema.methods.verifyPassword = async function(candidatePassword, userPassword) {
+userSchema.methods.verifyPassword = async function (candidatePassword, userPassword) {
     return await bcrypt.compare(candidatePassword, userPassword);
 };
 

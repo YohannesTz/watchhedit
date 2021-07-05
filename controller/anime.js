@@ -17,7 +17,7 @@ const upload = multer({
 
 exports.uploadImage = upload.single("img");
 
-exports.getAllAnime = async (req, res, next) => {
+exports.getAllAnime = async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()){
@@ -29,14 +29,7 @@ exports.getAllAnime = async (req, res, next) => {
 
         const page = req.query.page * 1 || 1;
         const limit = req.query.limit * 1 || 10;
-        const result = await Anime.paginate(
-            {
-                $or: [
-                    {
-                        creator: { $eq: req.user._id },
-                    }
-                ],
-            },
+        const result = await Anime.paginate({},
             {
                 page,
                 limit,
@@ -53,7 +46,7 @@ exports.getAllAnime = async (req, res, next) => {
     }
 };
 
-exports.getAnime = async (req, res, next) => {
+exports.getAnime = async (req, res) => {
     try {
         const errors = validationResult(req);
         if(!errors.isEmpty()){

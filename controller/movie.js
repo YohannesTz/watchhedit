@@ -29,14 +29,7 @@ exports.getAllMovies = async (req, res, next) => {
 
         const page = req.query.page * 1 || 1;
         const limit = req.query.limit * 1 || 10;
-        const result = await Movie.paginate(
-            {
-                $or: [
-                    {
-                        creator: { $eq: req.user._id },
-                    }
-                ],
-            },
+        const result = await Movie.paginate({},
             {
                 page,
                 limit,
@@ -182,5 +175,13 @@ exports.searchMovie = async (req, res) => {
             status: "error",
             message: error
         });
+    }
+};
+
+exports.createMovieList = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        
     }
 };

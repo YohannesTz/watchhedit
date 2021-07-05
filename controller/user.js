@@ -85,7 +85,9 @@ exports.searchUser = async (req, res) => {
                 $regex: regex,
                 $options: "si",
             },
-        });
+        }).populate('movieList')
+            .populate('animeList')
+            .populate('bookList');
 
         res.status(200).json({
             status: "success",
@@ -97,4 +99,108 @@ exports.searchUser = async (req, res) => {
             message: error
         });
     }
-}
+};
+
+exports.getAllUsers = async (req, res) => {
+    try {
+        console.log("Get All Users");
+
+        const page = req.query.page * 1 || 1;
+        const limit = req.query.limit * 1 || 10;
+        const result = await User.paginate({},
+            {
+                page,
+                limit,
+                sort: "-createdAt",
+            }
+        );
+
+        console.log(result);
+
+        res.status(200).json({
+            status: "success",
+            result,
+        });
+
+    } catch (error) {
+
+    }
+};
+
+exports.createMovieList = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({
+                status: "error",
+                message: errors.array()[0].msg,
+            });
+        }
+
+        const movieList = await User.findByIdAndUpdate(
+            req.user._id,
+            { $push: { movieList: req.body.list } },
+            { new: true }
+        );
+
+        res.status(201).json({
+            status: "success",
+            movieList
+        });
+
+    } catch (error) {
+
+    }
+};
+
+exports.createAnimeList = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({
+                status: "error",
+                message: errors.array()[0].msg,
+            });
+        }
+
+        const animeList = await User.findByIdAndUpdate(
+            req.user._id,
+            { $push: { animeList: req.body.list } },
+            { new: true }
+        );
+
+        res.status(201).json({
+            status: "success",
+            animeList
+        });
+
+    } catch (error) {
+
+    }
+};
+
+exports.createBookList = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({
+                status: "error",
+                message: errors.array()[0].msg,
+            });
+        }
+
+        const bookList = await User.findByIdAndUpdate(
+            req.user._id,
+            { $push: { bookList: req.body.list } },
+            { new: true }
+        );
+
+        res.status(201).json({
+            status: "success",
+            bookList
+        });
+
+    } catch (error) {
+
+    }
+};

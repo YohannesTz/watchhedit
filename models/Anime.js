@@ -14,9 +14,6 @@ const animeSchema = new mongoose.Schema({
     rating:{
         type: String,
     },
-    poster_image:{
-        type: String,
-    },
     cover_image:{
         type: String,
     },
@@ -25,6 +22,10 @@ const animeSchema = new mongoose.Schema({
     },
     description:{ //synopsis
         type: String,
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     }
 },{ timestamps: true });
 

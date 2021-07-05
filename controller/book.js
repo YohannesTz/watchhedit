@@ -30,15 +30,7 @@ exports.getAllBooks = async (req, res, next) => {
         const page = req.query.page * 1 || 1;
         const limit = req.query.limit * 1 || 10;
         const result = await Book.paginate(
-            {
-                $or: [
-                    {
-                        creator: {
-                            $eq: req.user._id
-                        }
-                    }
-                ]
-            },
+            {},
             {
                 page,
                 limit,

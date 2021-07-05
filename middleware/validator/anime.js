@@ -14,7 +14,7 @@ exports.validate = (type) => {
                 body("title_en").not().isEmpty().withMessage("Anime name is required"),
                 body("title_enjp").optional().not().isEmpty().withMessage("Anime Japaneese english name is required"),
                 body("title_jajp").optional().not().isEmpty().withMessage("Anime Japaneese name is required"),
-                body("average_rating").not().isEmpty().withMessage("Average rating is required"),
+                body("rating").not().isEmpty().withMessage("Average rating is required"),
                 body("episode_count").not().isEmpty().withMessage("Episode count is required"),
                 body("description").not().isEmpty().withMessage("Description count is required")
             ];
